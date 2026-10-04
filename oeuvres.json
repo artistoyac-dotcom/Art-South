@@ -1,0 +1,14 @@
+[
+  {
+    "id": "ART00001",
+    "titre": "Oasis, travaux au jardin",
+    "annee": "2025",
+    "technique": "Huile sur toile",
+    "dimensions": "55 x 46 cm",
+    "style": "Orientaliste",
+    "description": "Scène de vie dans une palmeraie du Sahara algérien : des hommes s'affairent autour d'un puits, à l'ombre des palmiers, entre les murs de pisé et le jardin verdoyant.",
+    "prix": 450,
+    "statut": "disponible",
+    "image": "images/oasis-laghouat.jpg"
+  }
+]

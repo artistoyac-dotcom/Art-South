@@ -1,0 +1,267 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Work+Sans:wght@400;500;600&display=swap');
+
+:root {
+  --papier: #EAE2CF;
+  --papier-clair: #F2ECDD;
+  --encre: #2B2118;
+  --petrole: #1F3A3D;
+  --ocre: #C08A34;
+  --terre: #9C4B32;
+  --palmier: #4B5D3A;
+  --ligne: rgba(43, 33, 24, 0.15);
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--papier);
+  color: var(--encre);
+  font-family: 'Work Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, .titre-oeuvre {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  margin: 0;
+}
+
+a { color: inherit; }
+
+/* --- Navigation --- */
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 3rem;
+  border-bottom: 1px solid var(--ligne);
+}
+.nav-logo {
+  font-family: 'Fraunces', serif;
+  font-size: 1.3rem;
+  letter-spacing: 0.02em;
+}
+.nav-liens {
+  display: flex;
+  gap: 2rem;
+  font-size: 0.95rem;
+}
+.nav-liens a { text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
+.nav-liens a:hover { border-color: var(--encre); }
+
+/* --- Hero --- */
+.hero {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  min-height: 78vh;
+  border-bottom: 1px solid var(--ligne);
+}
+.hero-texte {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 3rem 3.5rem;
+  max-width: 46ch;
+}
+.hero-eyebrow {
+  font-size: 0.85rem;
+  color: var(--terre);
+  margin-bottom: 1rem;
+}
+.hero-texte h1 {
+  font-size: clamp(2.1rem, 4vw, 3.2rem);
+  line-height: 1.08;
+  margin-bottom: 1.3rem;
+}
+.hero-texte p {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: rgba(43, 33, 24, 0.8);
+}
+.hero-image {
+  position: relative;
+  overflow: hidden;
+  background: var(--encre);
+}
+.hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.hero-image figcaption {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  color: var(--papier-clair);
+  font-size: 0.85rem;
+  font-style: italic;
+  font-family: 'Fraunces', serif;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.5);
+}
+
+/* --- Filtres --- */
+.filtres {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 2rem 3rem 1rem;
+}
+.filtres label {
+  font-size: 0.8rem;
+  color: rgba(43, 33, 24, 0.6);
+  margin-right: 0.25rem;
+}
+.filtres select {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 0.9rem;
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--ligne);
+  border-radius: 999px;
+  background: var(--papier-clair);
+  color: var(--encre);
+  cursor: pointer;
+}
+
+/* --- Galerie --- */
+.galerie {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2.5rem 2rem;
+  padding: 1.5rem 3rem 5rem;
+}
+.oeuvre {
+  cursor: pointer;
+  position: relative;
+}
+.oeuvre-image-wrap {
+  position: relative;
+  overflow: hidden;
+  background: #ddd4bd;
+  aspect-ratio: 4 / 3.3;
+}
+.oeuvre-image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+.oeuvre:hover .oeuvre-image-wrap img { transform: scale(1.035); }
+
+.prix-flottant {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  background: rgba(234, 226, 207, 0.94);
+  color: var(--encre);
+  font-size: 0.85rem;
+  padding: 0.3rem 0.7rem;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.25s, transform 0.25s;
+}
+.oeuvre:hover .prix-flottant { opacity: 1; transform: translateY(0); }
+
+.oeuvre-legende {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-top: 0.85rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid var(--ligne);
+}
+.titre-oeuvre { font-size: 1.05rem; }
+.meta-oeuvre {
+  font-size: 0.82rem;
+  color: rgba(43, 33, 24, 0.6);
+  margin-top: 0.2rem;
+}
+.statut-point {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 0.4rem;
+}
+.statut-disponible { background: var(--palmier); }
+.statut-vendu { background: var(--terre); }
+
+/* --- Modale --- */
+.modale-fond {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(43, 33, 24, 0.72);
+  z-index: 50;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+.modale-fond.ouverte { display: flex; }
+.modale {
+  background: var(--papier-clair);
+  max-width: 900px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+}
+.modale img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.modale-texte { padding: 2.5rem; position: relative; }
+.modale-fermer {
+  position: absolute;
+  top: 1rem;
+  right: 1.2rem;
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  cursor: pointer;
+  color: var(--encre);
+  font-family: 'Work Sans', sans-serif;
+}
+.modale-texte h2 { font-size: 1.6rem; margin-bottom: 0.3rem; }
+.modale-meta { font-size: 0.9rem; color: rgba(43, 33, 24, 0.65); margin-bottom: 1.3rem; }
+.modale-description { line-height: 1.65; margin-bottom: 1.8rem; }
+.modale-prix { font-family: 'Fraunces', serif; font-size: 1.4rem; margin-bottom: 1.5rem; }
+.modale-actions { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+.bouton {
+  display: inline-block;
+  padding: 0.75rem 1.4rem;
+  font-size: 0.9rem;
+  text-decoration: none;
+  border-radius: 2px;
+  transition: opacity 0.2s;
+}
+.bouton:hover { opacity: 0.85; }
+.bouton-principal { background: var(--petrole); color: var(--papier-clair); }
+.bouton-secondaire { background: transparent; color: var(--encre); border: 1px solid var(--encre); }
+
+/* --- Pied de page --- */
+.pied {
+  padding: 3rem;
+  border-top: 1px solid var(--ligne);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-size: 0.9rem;
+  color: rgba(43, 33, 24, 0.7);
+}
+.pied a { text-decoration: underline; text-underline-offset: 3px; }
+
+@media (max-width: 760px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero-image { min-height: 40vh; order: -1; }
+  .nav, .filtres, .galerie, .pied { padding-left: 1.25rem; padding-right: 1.25rem; }
+  .modale { grid-template-columns: 1fr; }
+  .modale img { max-height: 40vh; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}

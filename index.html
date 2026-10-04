@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rayane Yacine — Peintures et aquarelles du Sahara algérien</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-logo">Rayane Yacine</div>
+  <div class="nav-liens">
+    <a href="#galerie">Galerie</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-texte">
+    <div class="hero-eyebrow">Laghouat, Algérie</div>
+    <h1>Peindre la lumière du Sahara</h1>
+    <p>Huiles et aquarelles inspirées des oasis, des palmeraies et de la vie quotidienne
+       du Sud algérien, dans la tradition orientaliste d'Étienne Dinet.</p>
+  </div>
+  <figure class="hero-image">
+    <img src="images/oasis-laghouat.jpg" alt="Oasis, travaux au jardin">
+    <figcaption>Oasis, travaux au jardin</figcaption>
+  </figure>
+</section>
+
+<div class="filtres" id="galerie">
+  <label>Style</label>
+  <select id="filtre-style" onchange="filtrer()">
+    <option value="">Tous</option>
+    <option value="Orientaliste">Orientaliste</option>
+  </select>
+
+  <label>Disponibilité</label>
+  <select id="filtre-statut" onchange="filtrer()">
+    <option value="">Toutes</option>
+    <option value="disponible">Disponible</option>
+    <option value="vendu">Vendu</option>
+  </select>
+
+  <label>Prix</label>
+  <select id="filtre-prix" onchange="filtrer()">
+    <option value="">Tous</option>
+    <option value="0-300">Jusqu'à 300 €</option>
+    <option value="300-600">300 € – 600 €</option>
+    <option value="600-9999">600 € et plus</option>
+  </select>
+</div>
+
+<div class="galerie" id="grille-galerie">
+
+    <div class="oeuvre" data-style="Orientaliste" data-statut="disponible" data-prix="450"
+         onclick='ouvrirModale({"id": "ART00001", "titre": "Oasis, travaux au jardin", "annee": "2025", "technique": "Huile sur toile", "dimensions": "55 x 46 cm", "style": "Orientaliste", "description": "Scène de vie dans une palmeraie du Sahara algérien : des hommes s'affairent autour d'un puits, à l'ombre des palmiers, entre les murs de pisé et le jardin verdoyant.", "prix": 450, "statut": "disponible", "image": "images/oasis-laghouat.jpg"})'>
+      <div class="oeuvre-image-wrap">
+        <img src="images/oasis-laghouat.jpg" alt="Oasis, travaux au jardin" loading="lazy">
+        <div class="prix-flottant">450 €</div>
+      </div>
+      <div class="oeuvre-legende">
+        <div>
+          <div class="titre-oeuvre">Oasis, travaux au jardin</div>
+          <div class="meta-oeuvre">2025 · Huile sur toile</div>
+        </div>
+        <div class="meta-oeuvre"><span class="statut-point statut-disponible"></span>Disponible</div>
+      </div>
+    </div>
+</div>
+
+<div class="modale-fond" id="modale-fond" onclick="if(event.target===this) fermerModale()">
+  <div class="modale">
+    <img id="modale-img" src="" alt="">
+    <div class="modale-texte">
+      <button class="modale-fermer" onclick="fermerModale()">✕</button>
+      <h2 id="modale-titre"></h2>
+      <div class="modale-meta" id="modale-meta"></div>
+      <p class="modale-description" id="modale-description"></p>
+      <div class="modale-prix" id="modale-prix"></div>
+      <div class="modale-actions">
+        <a class="bouton bouton-principal" id="modale-contact" href="#contact">Me contacter</a>
+        <a class="bouton bouton-secondaire" href="https://instagram.com" target="_blank" rel="noopener">Voir sur Instagram</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="pied" id="contact">
+  <div>Rayane Yacine — Peintures et aquarelles du Sahara algérien</div>
+  <div><a href="mailto:contact@example.com">contact@example.com</a> · <a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a></div>
+</footer>
+
+<script>
+function ouvrirModale(o) {
+  document.getElementById('modale-img').src = o.image;
+  document.getElementById('modale-titre').textContent = o.titre;
+  document.getElementById('modale-meta').textContent = (o.annee || '') + ' · ' + (o.technique || '') + ' · ' + (o.dimensions || '');
+  document.getElementById('modale-description').textContent = o.description || '';
+  document.getElementById('modale-prix').textContent = o.statut === 'disponible' ? (o.prix + ' €') : 'Vendu';
+  document.getElementById('modale-fond').classList.add('ouverte');
+}
+function fermerModale() {
+  document.getElementById('modale-fond').classList.remove('ouverte');
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') fermerModale(); });
+
+function filtrer() {
+  const style = document.getElementById('filtre-style').value;
+  const statut = document.getElementById('filtre-statut').value;
+  const prixRange = document.getElementById('filtre-prix').value;
+  document.querySelectorAll('.oeuvre').forEach(el => {
+    let visible = true;
+    if (style && el.dataset.style !== style) visible = false;
+    if (statut && el.dataset.statut !== statut) visible = false;
+    if (prixRange) {
+      const [min, max] = prixRange.split('-').map(Number);
+      const prix = Number(el.dataset.prix);
+      if (prix < min || prix > max) visible = false;
+    }
+    el.style.display = visible ? '' : 'none';
+  });
+}
+</script>
+
+</body>
+</html>
